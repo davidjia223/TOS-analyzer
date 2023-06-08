@@ -1,0 +1,26 @@
+{
+  "name": "tos-analyzer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "axios-retry": "^3.5.0",
+    "body-parser": "^1.19.0",
+    "bottleneck": "^2.19.5",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "node-cache": "^5.1.2",
+    "openai": "^3.2.1",
+    "url": "^0.11.0"
+  }
+}

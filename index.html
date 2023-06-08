@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Website ToS Scraper</h2>
+
+<form id="scraperForm">
+  <label for="url-input">Website URL:</label><br>
+  <input type="text" id="url-input" name="url" value=""><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p id="result"></p>
+
+<script>
+document.getElementById('scraperForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const url = document.getElementById('url-input').value;
+
+  fetch('http://localhost:3000/scrape', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ url }),
+})
+.then(response => response.json())
+.then(data => {
+  // Store the result in localStorage
+  localStorage.setItem('result', JSON.stringify(data));
+  // Redirect to result.html
+  window.location.href = 'result.html';
+})
+
+.catch((error) => {
+  console.error('Error:', error);
+});
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Analyzed Terms of Service</h2>
+
+<p id="analysis-result"></p>
+
+<p id= "result" ></p>
+
+<button id="analyze-button">Analyze</button>
+
+<button id="back-button">Back to Scraper</button>
+
+<script src="analyze.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    // Get the result from sessionStorage
+    const result = localStorage.getItem('result');
+    if (result) {
+    const resultObj = JSON.parse(result);
+    document.getElementById('result').textContent = resultObj.tosText;
+}
+
+</script>
+
+</body>
+</html>
