@@ -18,7 +18,7 @@ document.getElementById('scraperForm').addEventListener('submit', function(e) {
 
   const url = document.getElementById('url-input').value;
 
-  fetch('http://localhost:3000/scrape', {
+  fetch('http://localhost:5500/scrape', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

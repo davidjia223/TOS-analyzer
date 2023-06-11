@@ -13,13 +13,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5500;
 
 if (!process.env.OPENAI_API_KEY) {
     console.log("Missing OPENAI_API_KEY environment variable");
     process.exit(1);
 }
-
 
 const organizationId = process.env.ORGANIZATION_ID || 'org-TJTOw16i4ecJ3TZGokAd5QXy';
 
@@ -34,17 +33,18 @@ const openai = new OpenAIApi(configuration);
 async function chatGptAnalyze(prompt) {
     try {
         const response = await openai.createCompletion({
-            engine: 'gpt-3.5-turbo',
+            engine: 'text-davinci-002',
             prompt: prompt,
-            max_tokens: 1500
+            max_tokens: 2000
         });
         const analysis = response.choices[0].text.trim();
         return analysis;
     } catch (err) {
-        console.log(err);
+        console.error("OpenAI API Call Error:", err);
         throw err; // throw the error to be caught by the route handler
     }
 }
+
 
 
 app.post('/scrape', (req, res) => {
@@ -104,10 +104,13 @@ app.post('/scrape', (req, res) => {
 app.post('/analyze', async (req, res) => {
     const prompt = req.body.prompt;
     try {
+        console.log('Received a request to /analyze with the following prompt:', prompt);
         const analysis = await chatGptAnalyze(prompt);
+        console.log('Analysis completed successfully:', analysis);
         res.json({ analysis: analysis });
     } catch (err) {
-        res.status(500).send(err.message);
+        console.error('An error occurred while trying to analyze the prompt:', err);
+        res.status(500).json({ error: err.message }); // send error message as JSON
     }
 });
 
