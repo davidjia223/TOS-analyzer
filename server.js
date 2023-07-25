@@ -1,55 +1,29 @@
 require('dotenv').config()
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const cors = require('cors');
+const path = require('path');
+const { Configuration, OpenAIApi } = require("openai");
 const URL = require('url').URL;
-const { Configuration, OpenAIApi } = require('openai');
-
-// Express application.
 const app = express();
+app.use(express.static('public'));
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.PORT || 5500;
-
-if (!process.env.OPENAI_API_KEY) {
-    console.log("Missing OPENAI_API_KEY environment variable");
-    process.exit(1);
-}
-
-const organizationId = process.env.ORGANIZATION_ID || 'org-TJTOw16i4ecJ3TZGokAd5QXy';
-
-// Configure the OpenAI API
 const configuration = new Configuration({
-    organization: organizationId,
     apiKey: process.env.OPENAI_API_KEY,
+    organization: process.env.ORGANIZATION_ID || 'org-TJTOw16i4ecJ3TZGokAd5QXy',
 });
-
 const openai = new OpenAIApi(configuration);
 
-async function chatGptAnalyze(prompt) {
-    try {
-        const response = await openai.createCompletion({
-            engine: 'text-davinci-002',
-            prompt: prompt,
-            max_tokens: 2000
-        });
-        const analysis = response.choices[0].text.trim();
-        return analysis;
-    } catch (err) {
-        console.error("OpenAI API Call Error:", err);
-        throw err; // throw the error to be caught by the route handler
-    }
-}
+app.use(cors());
+app.use(bodyParser.json());
 
 
-
-app.post('/scrape', (req, res) => {
+app.post('/scrape', async (req, res) => {
     let url = req.body.url;
-    
+
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
@@ -64,7 +38,7 @@ app.post('/scrape', (req, res) => {
             const $ = cheerio.load(html);
 
             let termsUrl;
-            //find link
+
             $('*').each(function() {
                 const text = $(this).text().toLowerCase();
 
@@ -77,12 +51,13 @@ app.post('/scrape', (req, res) => {
             });
 
             if (!termsUrl) {
+                console.log('Could not find a link to the terms and conditions page');
                 res.send('Could not find a link to the terms and conditions page');
                 return;
             }
 
             instance.get(termsUrl)
-                .then(response => {
+                .then(async response => {
                     const termsHtml = response.data;
                     const $terms = cheerio.load(termsHtml);
 
@@ -91,30 +66,33 @@ app.post('/scrape', (req, res) => {
                     const filteredText = termsText.substring(termsIndex).replace(/\s\s+/g, ' ');
                     const endIndex = filteredText.indexOf('©');
                     const finalText = filteredText.substring(0, endIndex);
-                    
-                    // return the scraped text
-                    res.json({tosText: finalText});
+
+                    console.log('finalText Index:', finalText);
+
+                    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalText;
+
+                    const openaiResponse = await openai.createCompletion({
+                        model: "text-davinci-003",
+                        prompt: promptText,
+                        max_tokens: 2000,
+                        temperature: 0.7,
+                        top_p:1.0,
+                        n: 1,
+                    });
+
+                    console.log('Analyzed Text:', openaiResponse.data.choices[0].text);
+
+                    res.json({tosText: finalText, analysis: openaiResponse.data});
                 })
-                .catch(err => res.status(500).send(err.message));
+                .catch(err => {
+                    console.log(err.message);
+                    res.status(500).send(err.message);
+                });
         })
-        .catch(err => res.status(500).send(err.message));
+        .catch(err => {
+            console.log(err.message);
+            res.status(500).send(err.message);
+        });
 });
 
-
-app.post('/analyze', async (req, res) => {
-    const prompt = req.body.prompt;
-    try {
-        console.log('Received a request to /analyze with the following prompt:', prompt);
-        const analysis = await chatGptAnalyze(prompt);
-        console.log('Analysis completed successfully:', analysis);
-        res.json({ analysis: analysis });
-    } catch (err) {
-        console.error('An error occurred while trying to analyze the prompt:', err);
-        res.status(500).json({ error: err.message }); // send error message as JSON
-    }
-});
-
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
+app.listen(3000, () => console.log('Server running on port 3000'));
