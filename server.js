@@ -20,7 +20,6 @@ if (!process.env.OPENAI_API_KEY) {
     process.exit(1);
 }
 
-const organizationId = process.env.ORGANIZATION_ID || 'org-TJTOw16i4ecJ3TZGokAd5QXy';
 
 // Configure the OpenAI API
 const configuration = new Configuration({
@@ -95,10 +94,17 @@ app.post('/scrape', (req, res) => {
                     // return the scraped text
                     res.json({tosText: finalText});
                 })
-                .catch(err => res.status(500).send(err.message));
+                .catch(err => {
+                    console.error(err);
+                    res.status(500).send(err.message);
+                });
         })
-        .catch(err => res.status(500).send(err.message));
+        .catch(err => {
+            console.error(err);
+            res.status(500).send(err.message);
+        });
 });
+
 
 
 app.post('/analyze', async (req, res) => {
@@ -109,8 +115,8 @@ app.post('/analyze', async (req, res) => {
         console.log('Analysis completed successfully:', analysis);
         res.json({ analysis: analysis });
     } catch (err) {
-        console.error('An error occurred while trying to analyze the prompt:', err);
-        res.status(500).json({ error: err.message }); // send error message as JSON
+        console.error(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
