@@ -18,9 +18,8 @@ document.getElementById('analyze-button').addEventListener('click', function() {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'OpenAI-Organization': 'org-TJTOw16i4ecJ3TZGokAd5QXy' // replace with your organization ID
     },
-    body: JSON.stringify({ prompt: prompt }) // send the prompt in the request body
+    body: JSON.stringify({ prompt: prompt })
 })
 
     .then(response => response.json())

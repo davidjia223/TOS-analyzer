@@ -30,34 +30,15 @@ axios.interceptors.response.use(response => {
     return response
 })
 
-// Configure the OpenAI API
 const configuration = new Configuration({
-    // organization: organizationId,
     apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 
-async function chatGptAnalyze(prompt) {
-    try {
-        const response = await openai.createCompletion({
-            engine: 'text-davinci-002',
-            prompt: prompt,
-            max_tokens: 2000
-        });
-        const analysis = response.choices[0].text.trim();
-        return analysis;
-    } catch (err) {
-        console.error("OpenAI API Call Error:", err);
-        throw err; // throw the error to be caught by the route handler
-    }
-}
-
-
-
-app.post('/scrape', (req, res) => {
+app.post('/scrape', async (req, res) => {
     let url = req.body.url;
-    
+
     if (!/^https?:\/\//i.test(url)) {
         url = 'http://' + url;
     }
@@ -72,7 +53,6 @@ app.post('/scrape', (req, res) => {
             const $ = cheerio.load(html);
 
             let termsUrl;
-            //find link
             $('*').each(function() {
                 const text = $(this).text().toLowerCase();
 
@@ -85,12 +65,13 @@ app.post('/scrape', (req, res) => {
             });
 
             if (!termsUrl) {
+                console.log('Could not find a link to the terms and conditions page');
                 res.send('Could not find a link to the terms and conditions page');
                 return;
             }
 
             instance.get(termsUrl)
-                .then(response => {
+                .then(async response => {
                     const termsHtml = response.data;
                     const $terms = cheerio.load(termsHtml);
 
@@ -99,28 +80,47 @@ app.post('/scrape', (req, res) => {
                     const filteredText = termsText.substring(termsIndex).replace(/\s\s+/g, ' ');
                     const endIndex = filteredText.indexOf('©');
                     const finalText = filteredText.substring(0, endIndex);
-                    
-                    // return the scraped text
-                    res.json({tosText: finalText});
+
+                    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalText;
+
+                    const openaiResponse = await openai.createCompletion({
+                        model: "text-davinci-003",
+                        prompt: promptText,
+                        max_tokens: 2000,
+                        temperature: 0.7,
+                        top_p:1.0,
+                        n: 1,
+                    });
+
+                    console.log('Analyzed Text:', openaiResponse.data.choices[0].text);
+
+                    res.json({tosText: finalText, analysis: openaiResponse.data});
                 })
                 .catch(err => {
-                    console.error(err);
+                    console.log(err.message);
                     res.status(500).send(err.message);
                 });
         })
         .catch(err => {
-            console.error(err);
+            console.log(err.message);
             res.status(500).send(err.message);
         });
 });
 
 
-
 app.post('/analyze', async (req, res) => {
-    const prompt = req.body.prompt;
+    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for imprecise texting and give me a value bar of abnormalness: " + req.body.prompt;
     try {
-        console.log('Received a request to /analyze with the following prompt:', prompt);
-        const analysis = await chatGptAnalyze(prompt);
+        console.log('Received a request to /analyze with the following prompt:', promptText);
+        const openaiResponse = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: promptText,
+            max_tokens: 2000,
+            temperature: 0.7,
+            top_p:1.0,
+            n: 1,
+        });
+        const analysis = openaiResponse.data.choices[0].text.trim();
         console.log('Analysis completed successfully:', analysis);
         res.json({ analysis: analysis });
     } catch (err) {
