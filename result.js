@@ -1,3 +1,4 @@
+//result.js
 document.getElementById('analyze-button').addEventListener('click', function() {
     // Parse the result from JSON to an object
     const resultObj = JSON.parse(result);
