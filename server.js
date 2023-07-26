@@ -5,8 +5,6 @@ const cheerio = require('cheerio');
 const cors = require('cors');
 const URL = require('url').URL;
 const { Configuration, OpenAIApi } = require('openai');
-
-// Express application.
 const app = express();
 
 app.use(cors());
@@ -20,10 +18,21 @@ if (!process.env.OPENAI_API_KEY) {
     process.exit(1);
 }
 
+// const organizationId = process.env.ORGANIZATION_ID || 'org-TJTOw16i4ecJ3TZGokAd5QXy';
+
+axios.interceptors.request.use(request => {
+    console.log('Starting Request', request)
+    return request
+})
+
+axios.interceptors.response.use(response => {
+    console.log('Response:', response)
+    return response
+})
 
 // Configure the OpenAI API
 const configuration = new Configuration({
-    organization: organizationId,
+    // organization: organizationId,
     apiKey: process.env.OPENAI_API_KEY,
 });
 
