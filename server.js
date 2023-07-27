@@ -7,6 +7,7 @@ const cors = require('cors');
 const URL = require('url').URL;
 const { Configuration, OpenAIApi } = require('openai');
 const app = express();
+const { extractSections } = require('./tos_filter.js');
 
 app.use(cors());
 app.use(express.json());
@@ -82,7 +83,12 @@ app.post('/scrape', async (req, res) => {
                     const endIndex = filteredText.indexOf('©');
                     const finalText = filteredText.substring(0, endIndex);
 
-                    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalText;
+                    const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
+
+                    const finalfilteredText = extractSections(finalText, keywords);
+                    console.log('Filtered Text:', finalfilteredText);
+                    
+                    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
 
                     const openaiResponse = await openai.createCompletion({
                         model: "text-davinci-003",
@@ -95,7 +101,7 @@ app.post('/scrape', async (req, res) => {
 
                     console.log('Analyzed Text:', openaiResponse.data.choices[0].text);
 
-                    res.json({tosText: finalText, analysis: openaiResponse.data});
+                    res.json({tosText: finalfilteredText, analysis: openaiResponse.data});
                 })
                 .catch(err => {
                     console.log(err.message);

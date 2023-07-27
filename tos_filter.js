@@ -101,37 +101,11 @@ function checkForChangesWithoutNotice(sentence) {
 // Load Terms of Service text from a local file
 const tosText = fs.readFileSync('./tos.txt', 'utf8');
 
-const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
-
 const extractedText = extractSections(tosText, keywords);
 
 console.log('Final Extracted Text:');
 console.log(extractedText);
-// ...rest of your provided code...
-
-// Function that you will call to initiate the whole process
-async function analyze() {
-  // Load Terms of Service text from a local file
-  const tosText = fs.readFileSync('./tos.txt', 'utf8');
-
-  const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
-
-  // Perform the first round of analysis to filter out unimportant text
-  const filteredText = extractSections(tosText, keywords);
-  console.log(`First Analysis Completed: ${filteredText}`);
-  
-  // Now the filteredText can be analyzed as per your existing analysis procedure
-  // I don't see the code for the second round of analysis, but here is where it should be added.
-  // You would probably call another function, similar to the 'extractSections', but for the second analysis round.
-  // For example, analyzeFilteredText(filteredText);
-  
-  // Alternatively, you can pass the filteredText to the existing analysis function if you have one.
-}
-
-// Call the function to start the whole process
-analyze();
 
 module.exports = {
     extractSections,
   };
-  
