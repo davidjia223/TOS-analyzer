@@ -86,6 +86,7 @@ function extractSections(text, keywords) {
 
   return finalText;
 }
+
 function checkForChangesWithoutNotice(sentence) {
   const changeRegex = /change|modify|alter/i;
   const noticeRegex = /notice|inform|notify/i;
@@ -97,14 +98,6 @@ function checkForChangesWithoutNotice(sentence) {
 
   return false;
 }
-
-// Load Terms of Service text from a local file
-const tosText = fs.readFileSync('./tos.txt', 'utf8');
-
-const extractedText = extractSections(tosText, keywords);
-
-console.log('Final Extracted Text:');
-console.log(extractedText);
 
 module.exports = {
     extractSections,
