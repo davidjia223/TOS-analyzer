@@ -104,7 +104,7 @@ app.post('/scrape', async (req, res) => {
                     res.json({tosText: finalfilteredText, analysis: openaiResponse.data});
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    console.log(err);
                     res.status(500).send(err.message);
                 });
         })
