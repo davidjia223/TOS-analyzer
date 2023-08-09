@@ -99,8 +99,6 @@ app.post('/scrape', async (req, res) => {
                         n: 1,
                     });
 
-                    console.log('Analyzed Text:', openaiResponse.data.choices[0].text);
-
                     res.json({tosText: finalfilteredText, analysis: openaiResponse.data});
                 })
                 .catch(err => {
