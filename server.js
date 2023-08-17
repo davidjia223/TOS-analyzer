@@ -67,8 +67,8 @@ app.post('/scrape', async (req, res) => {
             });
 
             if (!termsUrl) {
-                console.log('Could not find a link to the terms and conditions page');
-                res.send('Could not find a link to the terms and conditions page');
+                console.log('This website’s terms of service is not found. Please use with caution.');
+                res.send('This website’s terms of service is not found. Please use with caution.');
                 return;
             }
 
