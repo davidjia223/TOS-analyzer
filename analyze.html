@@ -12,6 +12,9 @@
 
 <button id="back-button">Back to Scraper</button>
 
+<button id="seeMoreBtn">See More</button>
+<div id="classificationsContainer" style="display:none;"></div>
+
 <script src="analyze.js"></script>
 
 <script>
@@ -23,6 +26,13 @@
     document.getElementById('result').textContent = resultObj.tosText;
 }
 
+</script>
+
+
+<script>
+    document.getElementById('seeMoreBtn').addEventListener('click', function() {
+        document.getElementById('classificationsContainer').style.display = 'block';
+    });
 </script>
 
 </body>
