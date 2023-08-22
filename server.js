@@ -120,6 +120,10 @@ app.post('/analyze', async (req, res) => {
         classifications: classificationResults
     });
     
+    const analysis = openaiResponse.data.choices[0].text.trim();
+    console.log('Analysis completed successfully:', analysis);
+    res.json({ analysis: analysis });
+
     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for imprecise texting and give me a value bar of abnormalness: " + req.body.prompt;
     try {
         console.log('Received a request to /analyze with the following prompt:', promptText);

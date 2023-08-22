@@ -31,8 +31,13 @@
 
 <script>
     document.getElementById('seeMoreBtn').addEventListener('click', function() {
-        document.getElementById('classificationsContainer').style.display = 'block';
-    });
+    // Retrieve analysis from localStorage
+    const fullAnalysis = localStorage.getItem('fullAnalysis');
+    
+    // Display analysis to container
+    document.getElementById('classificationsContainer').textContent = fullAnalysis;
+    document.getElementById('classificationsContainer').style.display = 'block';
+});
 </script>
 
 </body>
