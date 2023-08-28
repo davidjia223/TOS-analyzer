@@ -5,9 +5,11 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
 const URL = require('url').URL;
+const nlp = require('compromise');
 const { Configuration, OpenAIApi } = require('openai');
 const app = express();
 const { extractSections } = require('./tos_filter.js');
+const classifier = require('./trainClassifier');
 
 app.use(cors());
 app.use(express.json());
@@ -37,6 +39,20 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+
+function classifySentences(tosText) {
+    const doc = nlp(tosText);
+    const sentences = doc.sentences().out('array');
+    
+    return sentences.map(sentence => {
+      const classification = classifier.classify(sentence);
+      const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+      if (classification === 'negative' && isBroadStatement) {
+        return { sentence, classification, isBroadStatement };
+      }
+    }).filter(Boolean);
+  }
+  
 
 app.post('/scrape', async (req, res) => {
     let url = req.body.url;
@@ -84,9 +100,10 @@ app.post('/scrape', async (req, res) => {
                     const finalText = filteredText.substring(0, endIndex);
 
                     const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
-
                     const finalfilteredText = extractSections(finalText, keywords);
                     console.log('Filtered Text:', finalfilteredText);
+
+                    const classifications = classifySentences(finalfilteredText);
                     
                     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
 
@@ -99,12 +116,12 @@ app.post('/scrape', async (req, res) => {
                         n: 1,
                     });
 
-                    res.json({tosText: finalfilteredText, analysis: openaiResponse.data});
-                })
-                .catch(err => {
+                    res.json({ tosText: finalfilteredText, analysis: openaiResponse.data, classifications });
+                    })
+                    .catch(err => {
                     console.log(err);
                     res.status(500).send(err.message);
-                });
+                    });
         })
         .catch(err => {
             console.log(err);
