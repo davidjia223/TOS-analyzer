@@ -93,4 +93,7 @@ classifier.addDocument(processSentence('We can discontinue the service without n
 classifier.addDocument(processSentence('We have the right to use your data for decision-making and profiling.'), 'negative');
 // ... add more examples
 classifier.train();
-module.exports = classifier;
+module.exports = {
+    classifier,
+    processSentence
+  };

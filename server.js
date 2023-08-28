@@ -1,4 +1,4 @@
-//server.js
+// server.js
 require('dotenv').config()
 const express = require('express');
 const axios = require('axios');
@@ -9,7 +9,8 @@ const nlp = require('compromise');
 const { Configuration, OpenAIApi } = require('openai');
 const app = express();
 const { extractSections } = require('./tos_filter.js');
-const classifier = require('./trainClassifier');
+const { classifier, processSentence } = require('./trainClassifier');
+
 
 app.use(cors());
 app.use(express.json());
@@ -41,20 +42,21 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 function classifySentences(tosText) {
-    const doc = nlp(tosText);
-    const sentences = doc.sentences().out('array');
-    
-    return sentences.filter(sentence => {
-      const classification = classifier.classify(sentence);
-      const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
-      return classification === 'negative' && isBroadStatement;
-    }).map(sentence => {
-      const classification = classifier.classify(sentence);
-      const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
-      return { sentence, classification, isBroadStatement };
-    });
-  }
-
+  const doc = nlp(tosText);
+  const sentences = doc.sentences().out('array');
+  
+  return sentences.filter(sentence => {
+    const processedSentence = processSentence(sentence);
+    const classification = classifier.classify(processedSentence);
+    const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+    return classification === 'negative' && isBroadStatement;
+  }).map(sentence => {
+    const processedSentence = processSentence(sentence);
+    const classification = classifier.classify(processedSentence);
+    const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+    return { sentence, classification, isBroadStatement };
+  });
+}
 
 app.post('/scrape', async (req, res) => {
     let url = req.body.url;
