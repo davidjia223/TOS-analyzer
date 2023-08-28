@@ -25,19 +25,17 @@
     const resultObj = JSON.parse(result);
     document.getElementById('result').textContent = resultObj.tosText;
 }
-
 </script>
-
 
 <script>
     document.getElementById('seeMoreBtn').addEventListener('click', function() {
-    // Retrieve analysis from localStorage
-    const fullAnalysis = localStorage.getItem('fullAnalysis');
-    
-    // Display analysis to container
-    document.getElementById('classificationsContainer').textContent = fullAnalysis;
-    document.getElementById('classificationsContainer').style.display = 'block';
-});
+        // Retrieve tosText from localStorage
+        const tosText = localStorage.getItem('tosText');
+
+        // Display tosText to container
+        document.getElementById('classificationsContainer').textContent = tosText;
+        document.getElementById('classificationsContainer').style.display = 'block';
+    });
 </script>
 
 </body>
