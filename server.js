@@ -44,15 +44,17 @@ function classifySentences(tosText) {
     const doc = nlp(tosText);
     const sentences = doc.sentences().out('array');
     
-    return sentences.map(sentence => {
+    return sentences.filter(sentence => {
       const classification = classifier.classify(sentence);
       const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
-      if (classification === 'negative' && isBroadStatement) {
-        return { sentence, classification, isBroadStatement };
-      }
-    }).filter(Boolean);
+      return classification === 'negative' && isBroadStatement;
+    }).map(sentence => {
+      const classification = classifier.classify(sentence);
+      const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+      return { sentence, classification, isBroadStatement };
+    });
   }
-  
+
 
 app.post('/scrape', async (req, res) => {
     let url = req.body.url;
