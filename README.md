@@ -39,8 +39,7 @@ Click "Submit".
 - CORS
 - OpenAI
 - Natural
-- Compromise
-- Compromise-sentences
+- Compromise , Compromise-sentences
 - dotenv
 - URL
 - fs (File System)
