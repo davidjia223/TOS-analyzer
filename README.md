@@ -8,11 +8,10 @@ A web app that automatically checks a website's Terms of Service (ToS) and highl
 
 - **Auto-opens ToS pages**: Automatically opens a website's terms and conditions page.
 - **Highlights important parts**: Marks key parts of the ToS.
-- **Provides 5 Key summary Lines**: Gives a summary of the key points in the ToS.
-- **Browser extension**: Can be used as a browser extension.
-- **Clear instructions**: The application provides clear instructions to the user for custimization
 - **Detailed Analysis**: Provides a detailed analysis, highlighting any clauses or sections that deviate from commonly accepted standards or practices, and explaining why they might be considered unusual or potentially problematic.
-- **Easy to use extension**: The application can be used as a browser extension. (WIP)
+- **Provides 5 Key summary Lines**: Gives a summary of the key points in the ToS.
+- **Clear instructions**: The application provides clear instructions to the user for custimization
+- **Browser extension**: Can be used as a browser extension. (WIP)
 
 ## How it works
 
