@@ -107,7 +107,6 @@ app.post('/scrape', async (req, res) => {
                     const finalfilteredText = extractSections(finalText, keywords);
                     console.log('Filtered Text:', finalfilteredText);
                     res.json({tosText: finalfilteredText});
-                    
                     const classifications = classifySentences(finalfilteredText);
                     
                     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
