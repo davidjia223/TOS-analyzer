@@ -28,9 +28,9 @@ document.getElementById('scraperForm').addEventListener('submit', function(e) {
 .then(response => response.json())
 .then(data => {
   // Store the result in localStorage
-  localStorage.setItem('result', JSON.stringify(data));
-  // Redirect to result.html
-  window.location.href = 'result.html';
+  localStorage.setItem('result', JSON.stringify(data.tosText));
+  // Redirect to analyze.html
+  window.location.href = 'analyze.html';
 })
 
 .catch((error) => {
