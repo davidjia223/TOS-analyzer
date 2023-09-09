@@ -4,15 +4,16 @@ const fs = require('fs');
 const natural = require('natural');
 const nlp = require('compromise');
 nlp.extend(require('compromise-sentences'));
-const classifier = require('./trainClassifier');
 const commonLegalSentences = require('./commonLegalSentences');
+const { classifier, processSentence } = require('./trainClassifier');
+
 
 // Define your custom stopwords here
 const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
 'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
 
 // Function to process sentence by removing stopwords
-function processSentence(sentence) {
+function processStopWord(sentence) {
   let words = sentence.split(' ');
   words = words.filter(word => !customStopwords.includes(word));
   return words.join(' ');
@@ -32,6 +33,24 @@ function filterCommonLegalSentences(sentences, commonSentences, threshold = 0.9)
     }
     return true;
   });
+}
+
+
+function modifySentences(text) {
+  const doc = nlp(text);
+  const sentences = doc.sentences().out('array');
+
+  return sentences.map(sentence => {
+      const processedSentence = processSentence(sentence);
+      const classification = classifier.classify(processedSentence);
+
+      if (classification === 'negative') {
+          // Modify the sentence if it is classified as 'negative'
+          return 'Warning: ' + sentence;
+      } else {
+          return sentence;
+      }
+  }).join(' ');
 }
 
 function extractSections(text, keywords) {
@@ -81,8 +100,11 @@ function extractSections(text, keywords) {
   // Add negative sentences to the relevant sentences
   let finalText = (relevantSentences.concat(negativeSentences)).join(' ');
 
+  // Modify the sentences in the final text
+  finalText = modifySentences(finalText);
+
   // Process the final text to remove stopwords
-  finalText = processSentence(finalText);
+  finalText = processStopWord(finalText);
 
   return finalText;
 }

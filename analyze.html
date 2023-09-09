@@ -6,23 +6,45 @@
 
 <p id="analysis-result"></p>
 
-<p id= "result" ></p>
+<p id="result"></p>
 
 <button id="analyze-button">Analyze</button>
 
 <button id="back-button">Back to Scraper</button>
 
+<button id="seeMoreBtn">See More</button>
+<div id="classificationsContainer" style="display:none;"></div>
+
 <script src="analyze.js"></script>
 
 <script>
     const urlParams = new URLSearchParams(window.location.search);
-    // Get the result from sessionStorage
+    // Get the result from localStorage
     const result = localStorage.getItem('result');
     if (result) {
-    const resultObj = JSON.parse(result);
-    document.getElementById('result').textContent = resultObj.tosText;
-}
+        const resultObj = JSON.parse(result);
+        document.getElementById('result').textContent = resultObj.tosText;
+    }
+</script>
 
+
+<script>
+    document.getElementById('seeMoreBtn').addEventListener('click', function() {
+        // Retrieve result from localStorage and parse it
+        const result = JSON.parse(localStorage.getItem('result'));
+        
+        // Display the classification results
+        const classificationsContainer = document.getElementById('classificationsContainer');
+        result.classifications.forEach(classification => {
+            const p = document.createElement('p');
+            p.textContent = `${classification.sentence} - ${classification.classification}`;
+            if (classification.isBroadStatement) {
+                p.textContent += ' (Broad statement detected)';
+            }
+            classificationsContainer.appendChild(p);
+        });
+        classificationsContainer.style.display = 'block';
+    });
 </script>
 
 </body>

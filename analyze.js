@@ -25,6 +25,9 @@ document.getElementById('analyze-button').addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         document.getElementById('analysis-result').textContent = data.analysis;
+        
+        // Analysis stored in localStorage
+        localStorage.setItem('fullAnalysis', data.analysis);
     })
     .catch((error) => {
         console.error('Error:', error);

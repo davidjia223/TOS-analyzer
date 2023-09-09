@@ -32,9 +32,9 @@ document.getElementById('scraperForm').addEventListener('submit', function(e) {
   // Redirect to analyze.html
   window.location.href = 'analyze.html';
 })
-
 .catch((error) => {
-  console.error('Error:', error);
+    console.error('Error:', error);
+    document.getElementById('result').textContent = "Failed to scrape the website, please try again.";
 });
 
 });

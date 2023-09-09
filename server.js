@@ -1,13 +1,16 @@
-//server.js
+// server.js
 require('dotenv').config()
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
 const URL = require('url').URL;
+const nlp = require('compromise');
 const { Configuration, OpenAIApi } = require('openai');
 const app = express();
 const { extractSections } = require('./tos_filter.js');
+const { classifier, processSentence } = require('./trainClassifier');
+
 
 app.use(cors());
 app.use(express.json());
@@ -38,6 +41,23 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+function classifySentences(tosText) {
+  const doc = nlp(tosText);
+  const sentences = doc.sentences().out('array');
+  
+  return sentences.filter(sentence => {
+    const processedSentence = processSentence(sentence);
+    const classification = classifier.classify(processedSentence);
+    const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+    return classification === 'negative' && isBroadStatement;
+  }).map(sentence => {
+    const processedSentence = processSentence(sentence);
+    const classification = classifier.classify(processedSentence);
+    const isBroadStatement = !nlp(sentence).match('only').found && !nlp(sentence).match('limited to').found;
+    return { sentence, classification, isBroadStatement };
+  });
+}
+
 app.post('/scrape', async (req, res) => {
     let url = req.body.url;
 
@@ -67,8 +87,8 @@ app.post('/scrape', async (req, res) => {
             });
 
             if (!termsUrl) {
-                console.log('Could not find a link to the terms and conditions page');
-                res.send('Could not find a link to the terms and conditions page');
+                console.log('This website’s terms of service is not found. Please use with caution.');
+                res.send('This website’s terms of service is not found. Please use with caution.');
                 return;
             }
 
@@ -84,10 +104,11 @@ app.post('/scrape', async (req, res) => {
                     const finalText = filteredText.substring(0, endIndex);
 
                     const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
-
                     const finalfilteredText = extractSections(finalText, keywords);
                     console.log('Filtered Text:', finalfilteredText);
                     res.json({tosText: finalfilteredText});
+                    
+                    const classifications = classifySentences(finalfilteredText);
                     
                     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
 
@@ -100,14 +121,12 @@ app.post('/scrape', async (req, res) => {
                         n: 1,
                     });
 
-                    console.log('Analyzed Text:', openaiResponse.data.choices[0].text);
-
-                    res.json({tosText: finalfilteredText, analysis: openaiResponse.data});
-                })
-                .catch(err => {
+                    res.json({ tosText: finalfilteredText, analysis: openaiResponse.data, classifications });
+                    })
+                    .catch(err => {
                     console.log(err);
                     res.status(500).send(err.message);
-                });
+                    });
         })
         .catch(err => {
             console.log(err);
@@ -117,6 +136,8 @@ app.post('/scrape', async (req, res) => {
 
 
 app.post('/analyze', async (req, res) => {
+
+    
     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for imprecise texting and give me a value bar of abnormalness: " + req.body.prompt;
     try {
         console.log('Received a request to /analyze with the following prompt:', promptText);
