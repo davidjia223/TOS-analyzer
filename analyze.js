@@ -11,8 +11,15 @@ document.getElementById('analyze-button').addEventListener('click', function() {
     console.log('Retrieved terms of service text from localStorage:', text);
 
     const prompt = `
-    Considering the following attributes of the service: Auto-opening for terms and conditions pages, highlighting important parts, providing 5 key summary lines, easy to use extension, clear instructions, and a disclaimer reminding viewers to read the terms and conditions. The service aims to make reading terms and conditions easier and save time, especially for elder people. Now, please review the following Terms of Service and provide a detailed analysis. Specifically, highlight any clauses or sections that deviate from commonly accepted standards or practices, and explain why they might be considered unusual or potentially problematic: ${text}
-    `;
+    Given the service's features, which include:
+Auto-detection of terms and conditions pages,
+Emphasizing key sections,
+Offering a 5-point summary,
+User-friendly browser extension,
+Straightforward instructions,
+A reminder to users emphasizing the importance of reading the terms and conditions in full,
+The primary goal of this service is to simplify and expedite the process of reviewing terms and conditions, with a particular focus on assisting senior individuals.
+With that in mind, kindly assess the following Terms of Service. Please pinpoint and elucidate any clauses or segments that might diverge from standard norms or practices. Elaborate on why such elements could be perceived as unusual or potentially contentious: ${text}`;
 
     fetch('http://localhost:5500/analyze', {
     method: 'POST',

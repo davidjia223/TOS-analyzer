@@ -108,7 +108,7 @@ app.post('/scrape', async (req, res) => {
                     console.log('Filtered Text:', finalfilteredText);
                     const classifications = classifySentences(finalfilteredText);
 
-                    const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
+                    const promptText = "Given the service's features which include: Auto-detection of terms and conditions pages, emphasizing key sections, offering a 5-point summary, user-friendly browser extension, straightforward instructions, and a reminder to users emphasizing the importance of reading the terms in full — the primary goal is to simplify reviewing terms, especially for seniors. Now, please assess the following Terms of Service, pinpoint any clauses or segments diverging from standard norms, and explain why they might be seen as unusual or contentious: " + finalfilteredText;
 
                     const openaiResponse = await openai.createCompletion({
                         model: "text-davinci-003",
