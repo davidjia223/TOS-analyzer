@@ -106,9 +106,8 @@ app.post('/scrape', async (req, res) => {
                     const keywords = ['data use', 'privacy', 'disputes', 'cancellations', 'terms of service changes', 'data portability', 'data rectification', 'right to be forgotten'];
                     const finalfilteredText = extractSections(finalText, keywords);
                     console.log('Filtered Text:', finalfilteredText);
-                    res.json({tosText: finalfilteredText});
                     const classifications = classifySentences(finalfilteredText);
-                    
+
                     const promptText = "Please analyze the following to tell if it is normal or not. Keep it clean and precise analyze. Analyze like a robot that is trying to scan for virus, but instead scan for inprecise texting and give me a value bar of abnormalness: " + finalfilteredText;
 
                     const openaiResponse = await openai.createCompletion({
@@ -119,8 +118,8 @@ app.post('/scrape', async (req, res) => {
                         top_p:1.0,
                         n: 1,
                     });
-
-                    res.json({ tosText: finalfilteredText, analysis: openaiResponse.data, classifications });
+                    const analysis = openaiResponse.data.choices[0].text.trim();
+                    res.json({ tosText: finalfilteredText, analysis: analysis, classifications: classifications });
                     })
                     .catch(err => {
                     console.log(err);

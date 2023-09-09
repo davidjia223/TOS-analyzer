@@ -28,13 +28,13 @@ document.getElementById('scraperForm').addEventListener('submit', function(e) {
 .then(response => response.json())
 .then(data => {
   // Store the result in localStorage
-  localStorage.setItem('result', JSON.stringify(data.tosText));
+  localStorage.setItem('result', JSON.stringify(data));
   // Redirect to analyze.html
   window.location.href = 'analyze.html';
 })
+
 .catch((error) => {
-    console.error('Error:', error);
-    document.getElementById('result').textContent = "Failed to scrape the website, please try again.";
+  console.error('Error:', error);
 });
 
 });
