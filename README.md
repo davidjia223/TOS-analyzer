@@ -4,6 +4,8 @@
 
 A web app that automatically checks a website's Terms of Service (ToS) and highlights unusual or problematic sections. It helps make reading ToS easier and saves time for everyone, including older people.
 
+![Animation](https://github.com/davidjia223/TOS-analyzer/assets/45841175/4ee8c368-cec8-4305-b587-6dfcc4c7a73f)
+
 ## Key Features
 
 - **Auto-opens ToS pages**: Automatically opens a website's terms and conditions page.
