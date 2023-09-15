@@ -18,7 +18,7 @@ A web app that automatically checks a website's Terms of Service (ToS) and highl
 
 ## How it works
 
-The application uses the RestAPI and OpenAI API to analyze the terms of service of a website. It first scrapes the terms of service from the website, then processes the text to filter out common legal sentences and identify negative sentences and broad statements. The processed text is then sent to the OpenAI API for analysis. The results from the API are displayed on the web page.
+The application uses the RestAPI and OpenAI API to analyze the terms of service of a website. It first scrapes the terms of service from the website, then processes the text to filter out common legal sentences, then identify negative sentences and broad statements. The processed text is then sent to the OpenAI API for analysis. The results from the API are displayed on the web page.
 
 ## Installation
 
