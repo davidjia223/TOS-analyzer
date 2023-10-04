@@ -32,6 +32,8 @@ const commonLegalSentences = [
     'In no event shall we be liable for any special, indirect, or consequential damages arising out of or in connection with your use of this website.',
     'We reserve the right to enforce these terms of use to the fullest extent of the law.',
     'Your continued use of this website after any changes to these terms constitutes acceptance of those changes.',
+    'If any provision of these terms is found to be invalid or unenforceable, the remaining provisions will continue to be valid and enforceable.',
+    'We may assign our rights and obligations under these terms to any third party without notice.',
   ];
   
 module.exports = commonLegalSentences;
