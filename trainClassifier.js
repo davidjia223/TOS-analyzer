@@ -2,7 +2,7 @@
 
 const natural = require('natural');
 const classifier = new natural.BayesClassifier();
-
+const wordnet = new natural.WordNet();
 const stemmer = natural.PorterStemmer;
 const stopwords = natural.stopwords;
 const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
@@ -16,7 +16,43 @@ const processSentence = (sentence) => {
     const filtered = tokenized.filter(word => !customStopwords.includes(word));
     return filtered.map(word => stemmer.stem(word)).join(' ');
 }
- 
+
+
+const replaceSynonyms = async (sentence) => {
+  const words = sentence.split(' ');
+  for (let i = 0; i < words.length; i++) {
+    const synonyms = await new Promise((resolve) => {
+      wordnet.lookup(words[i], (results) => {
+        resolve(results.map((result) => result.synonyms).flat());
+      });
+    });
+    if (synonyms.length > 0) {
+      words[i] = synonyms[0]; // Replace with the first synonym
+    }
+  }
+  return words.join(' ');
+};
+
+// Pseudo-code for back translation
+const backTranslate = async (sentence) => {
+    const translated = await translateToAnotherLanguage(sentence);
+    return await translateBackToOriginalLanguage(translated);
+};
+
+
+// Random deletion of words
+const randomDeletion = (sentence, p=0.2) => {
+    const words = sentence.split(' ');
+    return words.filter(() => Math.random() > p).join(' ');
+};
+
+// Add augmented data to the classifier
+const addAugmentedData = async (sentence, label) => {
+    classifier.addDocument(processSentence(sentence), label);
+    const augmentedSentence = await replaceSynonyms(sentence);
+    classifier.addDocument(processSentence(augmentedSentence), label);
+  };
+
 // "positive" sentences: these don't seem to involve anything harmful or suspicious
 
 classifier.addDocument(processSentence('Your data will only be used to improve your experience.'), 'positive');
