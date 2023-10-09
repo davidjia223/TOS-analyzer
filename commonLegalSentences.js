@@ -34,6 +34,14 @@ const commonLegalSentences = [
     'Your continued use of this website after any changes to these terms constitutes acceptance of those changes.',
     'If any provision of these terms is found to be invalid or unenforceable, the remaining provisions will continue to be valid and enforceable.',
     'We may assign our rights and obligations under these terms to any third party without notice.',
+    'We may collect non-personal identification information about users whenever they interact with our site.',
+    'We adopt appropriate data collection, storage, and processing practices to protect against unauthorized access.',
+    'We may share generic aggregated demographic information with our business partners.',
+    'Users may find advertising or other content on our site that link to the sites and services of our partners.',
+    'We may update this privacy policy at any time, and you acknowledge and agree that it is your responsibility to review this policy periodically.',
+    'By using this site, you signify your acceptance of this policy and terms of service.',
+    'If you do not agree to this policy, please do not use our site.',
+  
   ];
   
 module.exports = commonLegalSentences;
