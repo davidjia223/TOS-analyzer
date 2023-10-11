@@ -127,6 +127,13 @@ await addAugmentedData('All warranties, whether stated or implied, are disclaime
 await addAugmentedData('You consent to hold us harmless from any claims or legal proceedings.', 'negative');
 await addAugmentedData('We can discontinue the service without notifying you.', 'negative');
 await addAugmentedData('We have the right to use your data for decision-making and profiling.', 'negative');
+await addAugmentedData('We reserve the right to sell your personal information to the highest bidder without your consent..', 'negative');
+await addAugmentedData('We may disclose your medical records to third parties for profit.', 'negative');
+await addAugmentedData('Your data may be shared with organizations that have a history of data breaches.', 'negative');
+await addAugmentedData('We may use your personal photos for advertising without your explicit permission.', 'negative');
+await addAugmentedData('We have the right to use your data for decision-making and profiling.', 'negative');
+;
+
 
 classifier.train();
 })();
