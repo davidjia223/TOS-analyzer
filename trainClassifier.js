@@ -132,6 +132,18 @@ await addAugmentedData('We may disclose your medical records to third parties fo
 await addAugmentedData('Your data may be shared with organizations that have a history of data breaches.', 'negative');
 await addAugmentedData('We may use your personal photos for advertising without your explicit permission.', 'negative');
 await addAugmentedData('We have the right to use your data for decision-making and profiling.', 'negative');
+await addAugmentedData('We are not responsible for any harm or loss caused by the misuse of your personal data.', 'negative');
+await addAugmentedData('We may share your location data with law enforcement agencies without a warrant.', 'negative');
+await addAugmentedData('We reserve the right to monitor your private conversations for marketing purposes.', 'negative');
+await addAugmentedData('Your financial information may be stored in insecure databases.', 'negative');
+await addAugmentedData('We may share your contact details with known spammers.', 'negative');
+await addAugmentedData('We may manipulate your account data for experimental purposes without your knowledge.', 'negative');
+await addAugmentedData('We may share your biometric data with unauthorized third parties.', 'negative');
+await addAugmentedData('We reserve the right to disclose your browsing history to your employer.', 'negative');
+await addAugmentedData('We may sell your personal data to political organizations without your consent.', 'negative');
+await addAugmentedData('We may share your personal information with entities that have been flagged for human rights violations.', 'negative');
+await addAugmentedData('We reserve the right to change these terms to include additional unacceptable practices at any time.', 'negative');
+
 ;
 
 
