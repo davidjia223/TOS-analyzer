@@ -20,17 +20,15 @@ const processSentence = (sentence) => {
 
 const replaceSynonyms = async (sentence) => {
   const words = sentence.split(' ');
-  for (let i = 0; i < words.length; i++) {
-    const synonyms = await new Promise((resolve) => {
-      wordnet.lookup(words[i], (results) => {
-        resolve(results.map((result) => result.synonyms).flat());
+  const synonymPromises = words.map(word => {
+    return new Promise((resolve) => {
+      wordnet.lookup(word, (results) => {
+        resolve(results.map((result) => result.synonyms).flat()[0] || word);
       });
     });
-    if (synonyms.length > 0) {
-      words[i] = synonyms[0]; // Replace with the first synonym
-    }
-  }
-  return words.join(' ');
+  });
+  const synonyms = await Promise.all(synonymPromises);
+  return synonyms.join(' ');
 };
 
 // Pseudo-code for back translation
