@@ -155,6 +155,10 @@ await addAugmentedData('We can share your personal information with unscrupulous
 await addAugmentedData('We may employ unethical tactics to gain unauthorized access to your data.', 'negative');
 await addAugmentedData('Your information may be used to deceive and defraud users for financial gain.', 'negative');
 await addAugmentedData('We reserve the right to engage in illegal activities using your personal data.', 'negative');
+await addAugmentedData('Your data may be exploited to undermine trust and security in online services.', 'negative');
+await addAugmentedData('We can share your data with organizations involved in cyberattacks and hacking.', 'negative');
+await addAugmentedData('We may engage in identity theft and impersonation using your personal information.', 'negative');
+
 
 ;
 
