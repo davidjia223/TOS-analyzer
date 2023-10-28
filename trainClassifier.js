@@ -143,7 +143,7 @@ await addAugmentedData('We may share your personal information with entities tha
 await addAugmentedData('We reserve the right to change these terms to include additional unacceptable practices at any time.', 'negative');
 await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
 await addAugmentedData('We are not responsible for the accuracy or reliability of any information or content provided by third parties through the service..', 'negative');
-await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
+await addAugmentedData('We are not liable for any data breaches or leaks that occur as a result of our security measures.', 'negative');
 await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
 await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
 
