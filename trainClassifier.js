@@ -144,8 +144,11 @@ await addAugmentedData('We reserve the right to change these terms to include ad
 await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
 await addAugmentedData('We are not responsible for the accuracy or reliability of any information or content provided by third parties through the service..', 'negative');
 await addAugmentedData('We are not liable for any data breaches or leaks that occur as a result of our security measures.', 'negative');
-await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
-await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
+await addAugmentedData('We reserve the right to exploit your personal information for undisclosed financial gains.', 'negative');
+await addAugmentedData('Your data may be used to target vulnerable individuals for deceptive marketing.', 'negative');
+await addAugmentedData('We can manipulate your preferences to influence your decisions without transparency.', 'negative');
+await addAugmentedData('Your personal information may be sold to the highest bidder without your knowledge.', 'negative');
+
 
 ;
 
