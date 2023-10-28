@@ -158,6 +158,11 @@ await addAugmentedData('We reserve the right to engage in illegal activities usi
 await addAugmentedData('Your data may be exploited to undermine trust and security in online services.', 'negative');
 await addAugmentedData('We can share your data with organizations involved in cyberattacks and hacking.', 'negative');
 await addAugmentedData('We may engage in identity theft and impersonation using your personal information.', 'negative');
+await addAugmentedData('Your information may be used for harassment and online bullying without restrictions.', 'negative');
+await addAugmentedData('We reserve the right to use your data to harm your reputation and livelihood.', 'negative');
+await addAugmentedData('Your data may be used to create deepfake content for malicious purposes.', 'negative');
+await addAugmentedData('We can engage in online scams and fraudulent activities using your personal information.', 'negative');
+await addAugmentedData('We may exploit your data to facilitate online fraud and criminal activities.', 'negative');
 
 
 ;
