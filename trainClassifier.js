@@ -175,7 +175,14 @@ await addAugmentedData('Your data may be weaponized to undermine trust in instit
 await addAugmentedData('We can use your personal information for extortion and blackmail.', 'negative');
 await addAugmentedData('We may intentionally spread false information using your identity and data.', 'negative');
 await addAugmentedData('Your data may be exploited for illegal financial schemes and fraud.', 'negative');
-await addAugmentedData('We reserve the right to engage in identity theft and impersonation for malicious purposes.', 'neg
+await addAugmentedData('We reserve the right to engage in identity theft and impersonation for malicious purposes.', 'negative');
+await addAugmentedData('Your information may be used to facilitate online hate speech and discrimination.', 'negative');
+await addAugmentedData('We can intentionally expose your vulnerabilities to cyberattacks and hacking.', 'negative');
+await addAugmentedData('We may engage in online stalking and invasive surveillance using your data.', 'negative');
+await addAugmentedData('Your data may be used for political manipulation and interference in elections.', 'negative');
+await addAugmentedData('We reserve the right to exploit your data to harm your personal and professional life.', 'negative');
+await addAugmentedData('Your personal information may be used to create and spread harmful deepfake content.', 'negative');
+await addAugmentedData('We can engage in online scams and fraudulent activities that target you specifically.', 'negative');
 
 ;
 
