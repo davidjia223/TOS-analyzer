@@ -148,6 +148,9 @@ await addAugmentedData('We reserve the right to exploit your personal informatio
 await addAugmentedData('Your data may be used to target vulnerable individuals for deceptive marketing.', 'negative');
 await addAugmentedData('We can manipulate your preferences to influence your decisions without transparency.', 'negative');
 await addAugmentedData('Your personal information may be sold to the highest bidder without your knowledge.', 'negative');
+await addAugmentedData('We may engage in deceptive practices to collect sensitive information.', 'negative');
+await addAugmentedData('We reserve the right to violate your privacy for undisclosed purposes.', 'negative');
+await addAugmentedData('Your data may be used to create false narratives and manipulate public opinion.', 'negative');
 
 
 ;
