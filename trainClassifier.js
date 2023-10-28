@@ -196,6 +196,9 @@ await addAugmentedData('We can engage in cyberbullying and harassment using your
 await addAugmentedData('We may intentionally expose your confidential data for public humiliation and harm.', 'negative');
 await addAugmentedData('Your personal information may be used for cyber espionage, sabotage, and criminal activities.', 'negative');
 await addAugmentedData('We reserve the right to engage in predatory practices that target and exploit unsuspecting users.', 'negative');
+await addAugmentedData('Your data may be weaponized to undermine trust in institutions, individuals, and society.', 'negative');
+await addAugmentedData('We can use your personal information for extortion, blackmail, and malicious intent.', 'negative');
+await addAugmentedData('We may intentionally spread false information and manipulate public perception using your identity and data.', 'negative');
 
 ;
 
