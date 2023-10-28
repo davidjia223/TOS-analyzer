@@ -190,6 +190,12 @@ await addAugmentedData('Your data may be sold to the highest bidder, with comple
 await addAugmentedData('We can engage in deceptive practices to harvest sensitive information about you.', 'negative');
 await addAugmentedData('We may intentionally violate your privacy for our undisclosed and unethical purposes.', 'negative');
 await addAugmentedData('Your data may be weaponized to create false narratives and deceive the public.', 'negative');
+await addAugmentedData('We reserve the right to share your personal information with malicious entities for harm.', 'negative');
+await addAugmentedData('Your information may be used to exploit and target vulnerable individuals for our gain.', 'negative');
+await addAugmentedData('We can engage in cyberbullying and harassment using your data without remorse.', 'negative');
+await addAugmentedData('We may intentionally expose your confidential data for public humiliation and harm.', 'negative');
+await addAugmentedData('Your personal information may be used for cyber espionage, sabotage, and criminal activities.', 'negative');
+await addAugmentedData('We reserve the right to engage in predatory practices that target and exploit unsuspecting users.', 'negative');
 
 ;
 
