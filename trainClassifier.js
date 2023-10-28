@@ -141,6 +141,11 @@ await addAugmentedData('We reserve the right to disclose your browsing history t
 await addAugmentedData('We may sell your personal data to political organizations without your consent.', 'negative');
 await addAugmentedData('We may share your personal information with entities that have been flagged for human rights violations.', 'negative');
 await addAugmentedData('We reserve the right to change these terms to include additional unacceptable practices at any time.', 'negative');
+await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
+await addAugmentedData('We are not responsible for the accuracy or reliability of any information or content provided by third parties through the service..', 'negative');
+await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
+await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
+await addAugmentedData('We may disclose your data under legal circumstances without your consent.', 'negative');
 
 ;
 

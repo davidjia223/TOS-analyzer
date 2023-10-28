@@ -120,7 +120,7 @@ app.post('/scrape', async (req, res) => {
                     });
                     const analysis = openaiResponse.data.choices[0].text.trim();
                     res.json({ tosText: finalfilteredText, analysis: analysis, classifications: classifications });
-                    })
+                    })  
                     .catch(err => {
                     console.log(err);
                     res.status(500).send(err.message);
