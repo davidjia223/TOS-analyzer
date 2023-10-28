@@ -183,6 +183,13 @@ await addAugmentedData('Your data may be used for political manipulation and int
 await addAugmentedData('We reserve the right to exploit your data to harm your personal and professional life.', 'negative');
 await addAugmentedData('Your personal information may be used to create and spread harmful deepfake content.', 'negative');
 await addAugmentedData('We can engage in online scams and fraudulent activities that target you specifically.', 'negative');
+await addAugmentedData('We may intentionally deceive you about how your data is being used for our gain.', 'negative');
+await addAugmentedData('Your personal information may be exploited without remorse for our financial benefit.', 'negative');
+await addAugmentedData('We reserve the right to manipulate your data to control and influence your decisions.', 'negative');
+await addAugmentedData('Your data may be sold to the highest bidder, with complete disregard for your privacy.', 'negative');
+await addAugmentedData('We can engage in deceptive practices to harvest sensitive information about you.', 'negative');
+await addAugmentedData('We may intentionally violate your privacy for our undisclosed and unethical purposes.', 'negative');
+await addAugmentedData('Your data may be weaponized to create false narratives and deceive the public.', 'negative');
 
 ;
 
