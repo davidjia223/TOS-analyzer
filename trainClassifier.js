@@ -203,7 +203,13 @@ await addAugmentedData('Your data may be exploited for illegal financial schemes
 await addAugmentedData('We reserve the right to engage in identity theft, impersonation, and fraudulent activities for malicious purposes.', 'negative');
 await addAugmentedData('Your information may be used to facilitate online hate speech, discrimination, and harm to others.', 'negative');
 await addAugmentedData('We can intentionally expose your vulnerabilities to cyberattacks, hacking, and security breaches.', 'negative');
-
+await addAugmentedData('We may share your personal information with anyone who pays us, regardless of their intentions or affiliations.', 'negative');
+await addAugmentedData('We do not conduct any screening or vetting of third parties that purchase your data from us. Your information could end up being used for illegal or harmful purposes.', 'negative');
+await addAugmentedData('We may sell your personal browsing history, search queries, banking information, medical records and other sensitive data without your consent.', 'negative');
+await addAugmentedData('We take no responsibility for how your data is used after it has been sold or shared with third parties. Any misuse or privacy violations are not our problem.', 'negative');
+await addAugmentedData('Your data will be kept indefinitely, even after your death. We claim perpetual rights to any information provided to us now or in the future.', 'negative');
+await addAugmentedData('Law enforcement and government agencies from any country can access your data without legal process or oversight. We do not restrict access to user data based on jurisdiction.', 'negative');
+await addAugmentedData('We may share your personal information, including identification documents, with entities known to have ties to criminal organizations or terrorist groups.', 'negative');
 
 ;
 
