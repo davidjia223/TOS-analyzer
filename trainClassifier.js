@@ -210,6 +210,10 @@ await addAugmentedData('We take no responsibility for how your data is used afte
 await addAugmentedData('Your data will be kept indefinitely, even after your death. We claim perpetual rights to any information provided to us now or in the future.', 'negative');
 await addAugmentedData('Law enforcement and government agencies from any country can access your data without legal process or oversight. We do not restrict access to user data based on jurisdiction.', 'negative');
 await addAugmentedData('We may share your personal information, including identification documents, with entities known to have ties to criminal organizations or terrorist groups.', 'negative');
+await addAugmentedData('We use covert techniques like cookies, trackers and device fingerprinting to collect data about you across the web without your knowledge or consent.', 'negative');
+await addAugmentedData('We automatically scan all your private files, messages and communications for commercial and data exploitation purposes. No content is off limits.', 'negative');
+await addAugmentedData('Your biometric, genetic, financial, medical and other highly sensitive personal data has no additional security or access restrictions applied by us.', 'negative');
+await addAugmentedData('We may manipulate algorithmic systems to selectively show, hide or change content, profiles and services available to you without transparency.', 'negative');
 
 ;
 
