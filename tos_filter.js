@@ -9,8 +9,12 @@ const { classifier, processSentence } = require('./trainClassifier');
 
 
 // Define your custom stopwords here
-const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
-'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
+const customStopwords = [
+  'the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 
+  'this', 'that', 'these', 'those', 'then', 'so', 'than', 'such', 'both', 'through', 
+  'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 
+  'While', 'This', 'It', 'Not'
+].reduce((acc, word) => (acc[word.toLowerCase()] = true, acc), {});
 
 // Function to process sentence by removing stopwords
 function processStopWord(sentence) {
