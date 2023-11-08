@@ -214,6 +214,10 @@ await addAugmentedData('We use covert techniques like cookies, trackers and devi
 await addAugmentedData('We automatically scan all your private files, messages and communications for commercial and data exploitation purposes. No content is off limits.', 'negative');
 await addAugmentedData('Your biometric, genetic, financial, medical and other highly sensitive personal data has no additional security or access restrictions applied by us.', 'negative');
 await addAugmentedData('We may manipulate algorithmic systems to selectively show, hide or change content, profiles and services available to you without transparency.', 'negative');
+await addAugmentedData('We may use your personal information to create a psychological profile of you, which we may use to manipulate your behavior and decision-making.', 'negative');
+await addAugmentedData('We may use your data to create a personalized feed of content that is designed to keep you engaged and active on our platform, even if it means promoting harmful or false information', 'negative');
+await addAugmentedData('We may use your data to influence your political beliefs and behaviors, either directly or through third-party organizations that we support', 'negative');
+await addAugmentedData('We may use your data to predict and prevent dissent or opposition to our company or our partners, either through monitoring or through active countermeasures', 'negative');
 
 ;
 
