@@ -222,6 +222,10 @@ await addAugmentedData('We may share your sensitive personal data with third-par
 await addAugmentedData('We reserve the right to monitor and record your online activities for data analysis.', 'negative');
 await addAugmentedData('Our company is not liable for any misuse of your personal information by external entities.', 'negative');
 await addAugmentedData('You relinquish your rights to privacy when using our platform.', 'negative');
+await addAugmentedData('We may share your browsing history and preferences with advertisers without your knowledge.', 'negative');
+await addAugmentedData('Any data you upload becomes our proprietary information, usable in any way we see fit.', 'negative');
+await addAugmentedData('We may use your geographical location data for surveillance purposes.', 'negative');
+await addAugmentedData('User communications may be intercepted and analyzed for quality assurance.', 'negative');
 
 
 ;
