@@ -218,6 +218,11 @@ await addAugmentedData('We may use your personal information to create a psychol
 await addAugmentedData('We may use your data to create a personalized feed of content that is designed to keep you engaged and active on our platform, even if it means promoting harmful or false information', 'negative');
 await addAugmentedData('We may use your data to influence your political beliefs and behaviors, either directly or through third-party organizations that we support', 'negative');
 await addAugmentedData('We may use your data to predict and prevent dissent or opposition to our company or our partners, either through monitoring or through active countermeasures', 'negative');
+await addAugmentedData('We may share your sensitive personal data with third-party vendors without explicit consent.', 'negative');
+await addAugmentedData('We reserve the right to monitor and record your online activities for data analysis.', 'negative');
+await addAugmentedData('Our company is not liable for any misuse of your personal information by external entities.', 'negative');
+await addAugmentedData('You relinquish your rights to privacy when using our platform.', 'negative');
+
 
 ;
 
