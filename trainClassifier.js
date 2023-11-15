@@ -226,6 +226,13 @@ await addAugmentedData('We may share your browsing history and preferences with 
 await addAugmentedData('Any data you upload becomes our proprietary information, usable in any way we see fit.', 'negative');
 await addAugmentedData('We may use your geographical location data for surveillance purposes.', 'negative');
 await addAugmentedData('User communications may be intercepted and analyzed for quality assurance.', 'negative');
+await addAugmentedData('We are not accountable for any data losses due to hacking or other security breaches.', 'negative');
+await addAugmentedData('Your usage patterns and personal preferences will be sold to third parties for profit.', 'negative');
+await addAugmentedData('You agree to be subjected to continuous tracking and surveillance while using our service.', 'negative');
+await addAugmentedData('We have unlimited access to all content stored in your account, including private messages.', 'negative');
+await addAugmentedData('Your personal information may be utilized in undisclosed research projects.', 'negative');
+await addAugmentedData('You consent to us sharing your email address with external marketing agencies.', 'negative');
+await addAugmentedData('Your account may be terminated at any moment, with your data retained for future use.', 'negative');
 
 
 ;
