@@ -27,8 +27,19 @@ const commonLegalSentences = [
     'The trademarks and logos used on this website are the property of their respective owners.',
     'We are not responsible for the content or availability of external websites linked to from this website.',
     'You may not use this website for any illegal or unauthorized purpose.',
-    'These terms of use constitute the entire agreement between you and us regarding your use of this website.'
-  ];
+    'These terms of use constitute the entire agreement between you and us regarding your use of this website.',
+    'This website is provided "as is" without any warranties, express or implied.',
+    'In no event shall we be liable for any special, indirect, or consequential damages arising out of or in connection with your use of this website.',
+    'We reserve the right to enforce these terms of use to the fullest extent of the law.',
+    'Your continued use of this website after any changes to these terms constitutes acceptance of those changes.',
+    'If any provision of these terms is found to be invalid or unenforceable, the remaining provisions will continue to be valid and enforceable.',
+    'We may assign our rights and obligations under these terms to any third party without notice.',
+    'Are you aware that by using this website, you agree to our terms and conditions?',
+    'If you do not agree to these terms, you must cease using this website immediately.',
+    'We may alter these terms and conditions at any time without notifying you.',
+    'You are accountable for your actions based on the information on this website.',
+
+  ];  
   
 module.exports = commonLegalSentences;
   
