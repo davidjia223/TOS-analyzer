@@ -7,19 +7,8 @@ nlp.extend(require('compromise-sentences'));
 const commonLegalSentences = require('./commonLegalSentences');
 const { classifier, processSentence } = require('./trainClassifier');
 
-<<<<<<< HEAD
 const customStopwords = ['the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 'this', 'that', 'these', 'those', 'then',
 'so', 'than', 'such', 'both', 'through', 'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 'While', 'This', 'It', 'Not'];
-=======
-
-// Define your custom stopwords here
-const customStopwords = [
-  'the', 'a', 'an', 'and', 'but', 'if', 'or', 'because', 'as', 'what', 'which', 
-  'this', 'that', 'these', 'those', 'then', 'so', 'than', 'such', 'both', 'through', 
-  'about', 'for', 'is', 'of', 'while', 'during', 'to', 'What', 'Which', 'Is', 'If', 
-  'While', 'This', 'It', 'Not'
-].reduce((acc, word) => (acc[word.toLowerCase()] = true, acc), {});
->>>>>>> e9138d25d808663fe29dc4c6a25be53f50866fb7
 
 function processStopWord(sentence) {
   let words = sentence.split(' ');
