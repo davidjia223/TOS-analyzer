@@ -24,7 +24,7 @@
     "fs": "^0.0.1-security",
     "natural": "^6.10.4",
     "node-cache": "^5.1.2",
-    "openai": "^4.20.1",
+    "openai": "^4.0.0",
     "url": "^0.11.0"
   }
 }

@@ -233,6 +233,11 @@ await addAugmentedData('We have unlimited access to all content stored in your a
 await addAugmentedData('Your personal information may be utilized in undisclosed research projects.', 'negative');
 await addAugmentedData('You consent to us sharing your email address with external marketing agencies.', 'negative');
 await addAugmentedData('Your account may be terminated at any moment, with your data retained for future use.', 'negative');
+await addAugmentedData('Our company provides a wide range of products and services.', 'neutral');
+await addAugmentedData('Please review our terms and conditions before using our platform.', 'neutral');
+await addAugmentedData('You can customize your profile settings according to your preferences.', 'neutral');
+await addAugmentedData('We offer customer support to assist you with any issues you may encounter.', 'neutral');
+await addAugmentedData('Feel free to contact us if you have any questions or concerns.', 'neutral');
 
 
 ;
