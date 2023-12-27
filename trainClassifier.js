@@ -238,6 +238,8 @@ await addAugmentedData('Please review our terms and conditions before using our 
 await addAugmentedData('You can customize your profile settings according to your preferences.', 'neutral');
 await addAugmentedData('We offer customer support to assist you with any issues you may encounter.', 'neutral');
 await addAugmentedData('Feel free to contact us if you have any questions or concerns.', 'neutral');
+await addAugmentedData('Our platform has received positive reviews from reputable sources.', 'informative');
+await addAugmentedData('We take user privacy seriously and implement strict security protocols.', 'informative');
 
 
 ;
