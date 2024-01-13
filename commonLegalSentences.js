@@ -38,8 +38,10 @@ const commonLegalSentences = [
     'If you do not agree to these terms, you must cease using this website immediately.',
     'We may alter these terms and conditions at any time without notifying you.',
     'You are accountable for your actions based on the information on this website.',
+    'The opinions expressed on this website are solely those of the authors and do not necessarily represent the views of the company.',
+    'This website may contain affiliate links, and we may receive a commission for purchases made through these links.',
+    'You agree not to engage in any activity that interferes with or disrupts the services or networks connected to this website.',
 
-  ];  
+  ];
   
 module.exports = commonLegalSentences;
-  
