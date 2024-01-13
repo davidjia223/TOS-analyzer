@@ -1,16 +1,15 @@
 // server.js
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
 const URL = require('url').URL;
 const nlp = require('compromise');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 const app = express();
 const { extractSections } = require('./tos_filter.js');
 const { classifier, processSentence } = require('./trainClassifier');
-
 
 app.use(cors());
 app.use(express.json());
@@ -35,11 +34,7 @@ axios.interceptors.response.use(response => {
     return response
 })
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 function classifySentences(tosText) {
   const doc = nlp(tosText);
